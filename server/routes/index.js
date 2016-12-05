@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var db = require('../db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,8 +9,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/searchByArtist', function(req, res, next) {
-	//res.render('searchresults', { title: 'filter by artist' });
-	res.send("Search By Artist")
+	db.query("SELECT * FROM artist LIMIT 1", function(err, rows,
+			fields){
+				if(err) throw err;
+				console.log("inside the query");
+				res.send(rows[0].artistname);
+			});
 });
 
 router.get('/searchByAlbum', function(req, res, next) {
