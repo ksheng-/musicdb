@@ -6,15 +6,25 @@ router.get('/', function(req, res, next) {
 	res.render('index', { title: 'musicdb' });
 	//res.send("test")
 });
-/*
-router.post('/music', function(req, res, next) {
-	//res.render('index', { title: 'musicdb' });
-	res.send("post")
+
+router.get('/searchByArtist', function(req, res, next) {
+	res.render('searchresults', { title: 'filter by artist' });
+	//res.send("Search By Artist")
 });
-*/
-router.get('/music', function(req, res, next) {
+
+router.get('/searchByAlbum', function(req, res, next) {
 	//res.render('index', { title: 'musicdb' });
-	res.send("get")
+	res.send("Search By Album!")
+});
+
+router.get('/searchBytrack', function(req, res, next) {
+	//res.render('index', { title: 'musicdb' });
+	res.send("Search By Track!")
+});
+
+router.get('/searchByTag', function(req, res, next) {
+	//res.render('index', { title: 'musicdb' });
+	res.send("Search By Tag!")
 });
 
 module.exports = router;
