@@ -15,25 +15,27 @@
 			<!-- SEARCHBAR -->
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-					<div class="input-group">
-						<input type="text" class="form-control" id="search" placeholder="Search" aria-label="...">
-						<div class="input-group-btn">
-							<button type="button" class="btn btn-default" id="search_button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="caret"></span>
-								<span class="sr-only">Toggle Dropdown</span>
-							</button>
-							<ul class="dropdown-menu">
-								<li class="dropdown-header" value=1 id="searchType">Search by Artist</li>
-								<li class="searchType" value=1><a href="#">Artists</a></li>
-								<li class="searchType" value=2><a href="#">Albums</a></li>
-								<li class="searchType" value=3><a href="#">Tracks</a></li>
-								<!-- <li role="separator" class="divider"></li> -->
-								<li><a href="#">Languages</a></li>
-								<li	class="searchType" value=4><a href="#">Tags</a></li>
-							</ul>
+					<form action="/" method="get">
+						<div class="input-group">
+							<input type="text" class="form-control" id="search" placeholder="Search" aria-label="..." name="query">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default" id="search_button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li class="dropdown-header" value=1 id="searchType">Search by Artist</li>
+									<li class="searchType" value=1><a href="#">Artists</a></li>
+									<li class="searchType" value=2><a href="#">Albums</a></li>
+									<li class="searchType" value=3><a href="#">Tracks</a></li>
+									<!-- <li role="separator" class="divider"></li> -->
+									<li><a href="#">Languages</a></li>
+									<li	class="searchType" value=4><a href="#">Tags</a></li>
+								</ul>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 			<!-- LOGIN OR REGISTER-->

@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/searchByArtist', function(req, res, next) {
-	res.render('searchresults', { title: 'filter by artist' });
-	//res.send("Search By Artist")
+	//res.render('searchresults', { title: 'filter by artist' });
+	res.send("Search By Artist")
 });
 
 router.get('/searchByAlbum', function(req, res, next) {
