@@ -23,5 +23,16 @@ $(document).ready(function(){
 			});
 
 		});
+
+		$('#username').keyup(function(e){
+			if(e.keyCode == 13)
+				$("#btn-login").click();
+		});
+
+		$('#password').keyup(function(e){
+			if(e.keyCode == 13)
+				$("#btn-login").click();
+		});
+
 });
 

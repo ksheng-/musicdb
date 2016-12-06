@@ -55,13 +55,31 @@ $(document).ready(function(){
 			success: function(result){
 				if (result == 0){
 					$(".login").addClass("has-failure");
-
+				}
+				else{
+					location.reload();
 				}
 			}
 		});
 	
 				
 	});
+
+	$('#new-username').keyup(function(e){
+		if(e.keyCode == 13)
+		$("#btn-signup").click();
+	});
+
+	$('#new-password').keyup(function(e){
+		if(e.keyCode == 13)
+		$("#btn-signup").click();
+	});
+
+	$('#confirm-password').keyup(function(e){
+		if(e.keyCode == 13)
+		$("#btn-signup").click();
+	});
+
 
 });
 
