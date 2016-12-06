@@ -8,5 +8,14 @@ a {
 }
 
 .login-text {
-	margin-top: 20px
+	margin-top: 20px;
 }
+
+.logout-text {
+	margin-top: 20px;
+}
+
+.dropdown-toggle {
+	border-radius: 0;
+}
+

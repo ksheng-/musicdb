@@ -8,28 +8,37 @@ router.get('/', function(req, res, next) {
 	//res.send("test")
 });
 
-router.get('/searchByArtist', function(req, res, next) {
-	db.query("SELECT * FROM artist LIMIT 1", function(err, rows,
-			fields){
+router.get('/artist-search', function(req, res, next) {
+	db.query("SELECT * FROM artist", function(err, rows, fields){
 				if(err) throw err;
 				console.log("inside the query");
-				res.send(rows[0].artistname);
-			});
+				res.render('results', { title: 'search by artist', category: 'Artists', results: rows});
+				// res.send(rows[0].artistname);
+			});	
 });
 
-router.get('/searchByAlbum', function(req, res, next) {
+router.get('/album-search', function(req, res, next) {
 	//res.render('index', { title: 'musicdb' });
 	res.send("Search By Album!")
 });
 
-router.get('/searchBytrack', function(req, res, next) {
+router.get('/track-search', function(req, res, next) {
 	//res.render('index', { title: 'musicdb' });
 	res.send("Search By Track!")
 });
 
-router.get('/searchByTag', function(req, res, next) {
+router.get('/language-search', function(req, res, next) {
 	//res.render('index', { title: 'musicdb' });
 	res.send("Search By Tag!")
+});
+
+router.get('/tag-search', function(req, res, next) {
+	//res.render('index', { title: 'musicdb' });
+	res.send("Search By Tag!")
+});
+
+router.post('/login', function(req, res, next){
+	console.log('posting');
 });
 
 module.exports = router;

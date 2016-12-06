@@ -15,42 +15,48 @@
 			<!-- SEARCHBAR -->
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-					<form action="/" method="get">
-						<div class="input-group">
-							<input type="text" class="form-control" id="search" placeholder="Search" aria-label="..." name="query">
-							<div class="input-group-btn">
-								<button type="button" class="btn btn-default" id="search_button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="caret"></span>
-									<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<ul class="dropdown-menu">
-									<li class="dropdown-header" value=1 id="searchType">Search by Artist</li>
-									<li class="searchType" value=1><a href="#">Artists</a></li>
-									<li class="searchType" value=2><a href="#">Albums</a></li>
-									<li class="searchType" value=3><a href="#">Tracks</a></li>
-									<!-- <li role="separator" class="divider"></li> -->
-									<li><a href="#">Languages</a></li>
-									<li	class="searchType" value=4><a href="#">Tags</a></li>
-								</ul>
-							</div>
+					<div class="input-group">
+						<input type="text" class="form-control" id="search" placeholder="Search" aria-label="..." name="query">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default" id="btn-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+							<button type="button" class="btn btn-default dropdown-toggle" id="category-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Artists
+								<!-- <span class="caret"></span> -->
+								<!-- <span class="sr-only">Toggle Dropdown</span> -->
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">Category</li>
+								<li class="category"><a href="#">Artists</a></li>
+								<li class="category"><a href="#">Albums</a></li>
+								<li class="category"><a href="#">Tracks</a></li>
+								<!-- <li role="separator" class="divider"></li> -->
+								<li	class="category"><a href="#">Tags</a></li>
+							</ul>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 			<!-- LOGIN OR REGISTER-->
 			<div class="row">
 				<!-- BUTTONS -->
 				<div class="col-md-2 col-md-offset-5">
-					<div class="text-center login-text"><a href="#" data-toggle="modal" data-target=".login-modal">login</a> / <a href="#" data-toggle="modal" data-target=".register-modal">register</a></div>
+					<div class="text-center login-text hidden">
+						<a href="#" data-toggle="modal" data-target=".login-modal">login</a> / 
+						<a href="#" data-toggle="modal" data-target=".signup-modal">signup</a>
+					</div>
+					<div class="text-center logout-text hidden">
+						currently signed in as <a href="#" id="current-user"></a> /  
+						<a href="#" id="logout">logout</a>
+					</div>
 				</div>
+
 				<!-- MODALS -->
 				<% include login_modal.ejs %>
-				<% include register_modal.ejs %>
+				<% include signup_modal.ejs %>
 			</div>
 		</div>
-	</body>
+		</body>
 
-	<% include scripts.ejs %>
+		<% include scripts.ejs %>
 
-</html>
+		</html>

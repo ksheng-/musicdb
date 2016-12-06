@@ -1,50 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<script>
-$(document).ready(function(){
-		console.log("ready!");
-
-		$(".searchType").click(function(){
-			console.log("searchType clicked!");
-			$("#searchType").val($(this).val());
-			});
-
-		$("#search_button").click(function(){
-			console.log("search button clicked!");
-			switch($("#searchType").val()){
-			case 1:
-			$.ajax({type: "GET",
-				url: "/searchByArtist",
-				success:function(result){
-				$("#search").val(result);
-				}});
-			break;
-			case 2:
-			$.ajax({type: "GET",
-				url: "/searchByAlbum",
-				success:function(result){
-				$("#search").val(result);
-				}});
-			break;
-			case 3:
-			$.ajax({type: "GET",
-				url: "/searchByTrack",
-				success:function(result){
-				$("#search").val(result);
-				}});
-			break;
-			case 4:
-			$.ajax({type: "GET",
-					url: "/searchByTag",
-					success:function(result){
-					$("#search").val(result);
-					}});
-			break;
-
-			}
-		});
-});
-
-</script>
+<script src="/javascripts/js-cookie.js"></script>
+<script src="/javascripts/global.js"></script>
+<script src="/javascripts/search.js"></script>
+<script src="/javascripts/login.js"></script>
+<script src="/javascripts/signup.js"></script>

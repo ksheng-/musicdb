@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('client-sessions');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -43,4 +44,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+/*
+app.use(session({
+	cookieName: 'session',
+	secret: 'secrete',
+	duration: 30*60*1000,
+	activaeDuration: 5*60*1000,
+}));
+*/
 module.exports = app;
