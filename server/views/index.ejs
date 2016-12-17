@@ -18,19 +18,21 @@
 					<div class="input-group">
 						<input type="text" class="form-control" id="search" placeholder="Search" aria-label="..." name="query">
 						<div class="input-group-btn">
-							<button type="button" class="btn btn-default" id="btn-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-							<button type="button" class="btn btn-default dropdown-toggle" id="category-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<button type="button" class="btn btn-default" id="btn-search"> 
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default dropdown-toggle" id="category-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value=1>
 								Artists
 								<!-- <span class="caret"></span> -->
 								<!-- <span class="sr-only">Toggle Dropdown</span> -->
 							</button>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header">Category</li>
-								<li class="category"><a href="#">Artists</a></li>
-								<li class="category"><a href="#">Albums</a></li>
-								<li class="category"><a href="#">Tracks</a></li>
+								<li class="category" value=1><a href="#">Artists</a></li>
+								<li class="category" value=2><a href="#">Albums</a></li>
+								<li class="category" value=3><a href="#">Tracks</a></li>
 								<!-- <li role="separator" class="divider"></li> -->
-								<li	class="category"><a href="#">Tags</a></li>
+								<li	class="category" value=4><a href="#">Tags</a></li>
 							</ul>
 						</div>
 					</div>

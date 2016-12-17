@@ -19,7 +19,9 @@ $(document).ready(function(){
 		Cookies.remove('user');
 		$(".logout-text").addClass("hidden");
 		$(".login-text").removeClass("hidden");
+		location.href = "/";
 	});
+
 
 });
 

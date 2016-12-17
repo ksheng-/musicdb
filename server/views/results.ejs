@@ -1,38 +1,104 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<% include head.ejs %>
+		 <% include head.ejs %> 
 	</head>
 	
 	<body>
-		<% include navbar.ejs %>
+		 <% include navbar.ejs %> 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<h1>Search results for ASDASD</h1>
+				<div class="col-md-8 col-md-offset-5">
+					<h1>Search results</h1>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<table class="table table-hover">
 						<tr>
-							<% for (var field in results[0]) {%>
-								<th><%= field %></th>
+							<%
+							if(typeof artist_results !== 'undefined'){
+							for (var field in artist_results[0]) {%>
+							<th><%= field %></th>
+							<% }
+							%>
+						</tr>
+
+						<% for (var i=0; i<artist_results.length; i++) {%>
+						<tr>	
+							<% for(var field in artist_results[i]) {%>
+							<td><%= artist_results[i][field] %></td>
 							<% } %>
 						</tr>
-						<% for (var i=0; i<results.length; i++) {%>
-							<tr>
-								<% for(var field in results[i]) {%>
-									<td><%= results[i][field] %></td>
-								<% } %>
-							</tr>
-						<% } %>
+						<% }} %>
+
+						<tr>
+							<%
+							if(typeof album_results !== 'undefined'){
+							for (var field in album_results[0]) {%>
+							<th><%= field %></th>
+							<% } %>
+						</tr>
+						<% for (var i=0; i<album_results.length; i++) {%>
+						<tr>
+							<% for(var field in album_results[i]) {%>
+							<% if(field == 'artistname') {%>
+							<td><a href='#' class='artist-click' ><%= album_results[i][field] %></a></td>
+							<%} else {%>
+							<td><%= album_results[i][field] %></td>
+							<%}} %>
+						</tr>
+						<% }} %>
+
+
+						<tr>
+							<%
+							if(typeof track_results !== 'undefined'){ %>
+							<% for (var field in track_results[0]) {%>
+							<th><%= field %></th>/
+							<% } %>
+						</tr>
+						<% for (var i=0; i<track_results.length; i++) {%>
+						<tr>
+							<% for(var field in track_results[i]) {%>
+							<% if(field == 'albumname') {%>
+							<td><a href='#' class='album-click'><%= track_results[i][field] %></a></td>
+							<%} else{%>
+							<td><%= track_results[i][field] %></td>
+							<% }} %>
+						</tr>
+						<% }} %>
+
+						<tr>
+							<%
+							if(typeof tag_results !== 'undefined'){	
+							for (var field in tag_results[0]) {%>
+							<th><%= field %></th>
+							<% } %>
+						</tr>
+						<% for (var i=0; i<tag_results.length; i++) {%>
+						<tr>
+							<% for(var field in tag_results[i]) {%>
+							<td><%= tag_results[i][field] %></td>
+							<% } %>
+						</tr>
+						<% }} %>
+
 					</table>
 				</div>
 			</div>
 		</div>
-	</body>
+		</body>
 
-	<% include scripts.ejs %>
+		<% include scripts.ejs %>
+		<script>
+$(document).ready(function(){
+		$(document).keyup(function(e){
+			if(e.keyCode == 8)
+			//location.href = "/";
+			window.history.back();
+			});
+		});
+		</script>
 
-</html>
+		</html>

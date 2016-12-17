@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.1.4",
     "csv": "^1.1.0",
     "likely": "^0.2.0",
-    "mysql": "^2.12.0"
+    "mysql": "^2.12.0",
+    "nodebrainz": "^2.1.1"
   }
 }

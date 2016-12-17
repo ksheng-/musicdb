@@ -1,52 +1,99 @@
 $(document).ready(function(){
-	console.log("ready!");
+	var category = $("#category-button").val();
 
-	var category = "Artists";
 	$(".category").click(function(){
 		console.log("category clicked!");
-		category = $(this).text();
-		$("#category-button").text(category);
+		category = $(this).val();
+		//var value = $(this).val();
+		$("#category-button").val(category);
+		$("#category-button").text($(this).text());
+	});
+
+	$('#search').keyup(function(e){
+		if(e.keyCode == 13)
+		$("#btn-search").click();
+	});
+
+	$("#back").click(function(){
+		console.log('back');
+		location.href = '/';
 	});
 
 	$("#btn-search").click(function(){
-		console.log("asdasdas");
+		var search_val = $("#search").val();
+		category = $("#category-button").val();
+		console.log(category);
+		$("#search").val("");
+		if(search_val == "")
+		return;
 		switch (category) {
-			case "Artists":
-				console.log(category + " search request");
-				$.ajax({type: "GET",
-					url: "/artist-search",
-					success:function(result){
-						location.href = "/artist-search";
-					}});
+			case "1":
+				var payload = {
+					artist_name: search_val
+				};
+
+				var query = $.param(payload);
+				location.href = "/artist-search?" + query;
+				// $.ajax({type: "GET",
+					// url: "/artist-search",
+					// data: payload, 
+					// success:function(result){
+						// location.href = "/artist-search";
+					// }});
 				break;
-			case "Albums":
-				console.log(category + " search request");
-				$.ajax({type: "GET",
-					url: "/album-search",
-					success:function(result){
-						location.href = "/album-search";
-						// $("#search").val(result);
-					}});
+			case "2":
+				var payload = {
+					album_name: search_val
+				};
+
+				var query = $.param(payload);
+				location.href = "/album-search?" + query;
+
 				break;
-			case "Tracks":
-				console.log(category + " search request");
-				$.ajax({type: "GET",
-					url: "/track-search",
-					success:function(result){
-						location.href = "/track-search";
-						// $("#search").val(result);
-					}});
+			case "3":
+				var payload = {
+					track_name: search_val
+				};
+
+				var query = $.param(payload);
+				location.href = "/track-search?" + query;
+
 				break;
-			case "Tags":
-				console.log(category + " search request");
-				$.ajax({type: "GET",
-					url: "/tag-search",
-					success:function(result){
-						location.href = "/tage-search";
-						// $("#search").val(result);
-					}});
+			case "4":
+				var payload = {
+					tag_name: search_val
+				};
+
+				var query = $.param(payload);
+				location.href = "/tag-search?" + query;
+
 				break;
 		}
 	});
+
+	$('.navbar-brand').click(function(){
+		location.href = '/';
+	});
+
+	$('.artist-click').click(function(){
+		console.log($(this).text());
+		var payload = {
+			artist_name: $(this).text() 
+		};
+
+		var query = $.param(payload);
+		location.href = "/artist-search?" + query;
+	});
+
+	$('.album-click').click(function(){
+		console.log($(this).text());
+		var payload = {
+			album_name: $(this).text() 
+		};
+
+		var query = $.param(payload);
+		location.href = "/album-search?" + query;
+	});
+
 });
 
