@@ -11,27 +11,44 @@
 				<div class="col-md-8 col-md-offset-2 results-header">
 					<h1><strong>Search Results</strong></h1>
 					<h3><em><strong><%= results.length %></strong> entries containing <strong>"<%= query %>"</strong> in <span class="lowercase"><%= category %></span>.</em></h3>
+					<hr>
 				</div>
 			</div>
+
+
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<table class="table table-hover">
 						<tr>
 							<% for (var field in results[0]) {%>
-									<th><%= field %></th>
+							<th><%= field %></th>
 							<% } %>
 						</tr>
+
+						<!-- search result -->
+						<% if( results.title !== 'undefined'){ %>
 						<% for (var i = 0; i < results.length; ++i) {%>
-							<tr>
-								<% for (var field in results[0]) {%>
-									<td><%= results[i][field] %></td>
-								<% } %>
-							</tr>
+						<tr>
+							<% for (var field in results[0]) {%>
+							<% if( field == 'title'){ %>
+							<td><a href="#" id='track-click' data-toggle="modal" data-target=".rating-modal"><%= results[i][field] %></a></td>
+							<% }else{ %>
+							<td><%= results[i][field] %></td>
+							<% } %>
+							<% } %>
+						</tr>
 						<% } %>
+						<% } %>
+
+					
 					</table>
 				</div>
 			</div>
 		</div>
-	</body>
-	<% include scripts.ejs %>
-</html>
+		</body>
+
+		<!-- MODALS -->
+		<% include rating_modal.ejs %>
+		<% include scripts.ejs %>
+
+		</html>

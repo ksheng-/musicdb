@@ -29,6 +29,7 @@ $(document).ready(function(){
 	// Logout
 	$("#logout").click(function(){
 		Cookies.remove('user');
+		Cookies.remove('uid');
 		$("#rate").addClass("hidden");
 		$(".logout-text").addClass("hidden");
 		$(".login-text").removeClass("hidden");

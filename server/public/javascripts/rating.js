@@ -74,6 +74,7 @@ $(document).ready(function(){
 					// do something
 				}
 			});
+		$('#close-rate').click();
 
 	});
 

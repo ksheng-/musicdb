@@ -23,7 +23,7 @@ router.post('/login', function(req,res,next){
 			res.status(403).send('Invalid credentials!');
 		} else{
 			console.log("User " + req.body.username + " has logged in\n");
-			res.status(200).send(rows[0].uname);
+			res.status(200).send(rows[0]);
 		}
 	});
 

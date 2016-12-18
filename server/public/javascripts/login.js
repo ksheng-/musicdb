@@ -15,7 +15,8 @@ $(document).ready(function(){
 
 					}
 					else{
-						Cookies.set('user',result);
+						Cookies.set('user',result['uname']);
+						Cookies.set('uid',result['uid']);
 						console.log(Cookies.get().user);
 						location.reload();
 					}
