@@ -35,10 +35,12 @@ fs.readFile(filename, 'utf8', function(err, data) {
 			// Artist table
 			if (output[row].MBID == 0) {
 				var entry = {
-					name: output[row].ArtistName,
-					locality: output[row].ArtistLocation
+					tname: output[row].Title,
+					tempo:
+					
+					// locality: output[row].ArtistLocation
 				};
-				connection.query('INSERT INTO ?? SET ?', ['Artists', entry], function(err, result){
+				connection.query('INSERT INTO ?? SET ?', ['Tracks', entry], function(err, result){
 					if (err) throw err;	   
 					console.log(entry.name + " inserted into the db (no MBID)")
 				});
@@ -52,11 +54,9 @@ fs.readFile(filename, 'utf8', function(err, data) {
 							name: output[i].ArtistName,
 							type: response.type,
 							DOB: response["life-span"].begin,
-							locality: output[i].ArtistLocation,
-							image: ,
-							MBID:
+							locality: output[i].ArtistLocation
 						};
-						connection.query('INSERT INTO ?? SET ?', ['Artists', entry], function(err, result){
+						connection.query('INSERT INTO ?? SET ?', ['Tracks', entry], function(err, result){
 							if (err) throw err;
 							console.log(output[i].ArtistName + " inserted into the db")
 							if (i == output.length - 1) {
@@ -70,12 +70,4 @@ fs.readFile(filename, 'utf8', function(err, data) {
 		}
 	});
 });
-
-var splitFields = function(entry, fields){
-	var newObj = {};
-	for (var i = 0; i < fields.length; ++i){
-		newObj[fields[new_names[i]]] = entry[fields[old_names[i]]];
-	}
-	return newObj;
-}
 

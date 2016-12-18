@@ -9,33 +9,38 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/artist-search', function(req, res, next) {
-	var search_val = req.query["artist_name"] + "%";
+	// Search for all rows that contain query
+	var search_val = req.query["artist_name"];
 	console.log(search_val);
-	db.query("SELECT DISTINCT * FROM artist WHERE artistname LIKE ?",[search_val], function(err, rows, fields){
-				if(err) throw err;
-				res.render('results', { title: 'search by artist', category: 'Artists', artist_results: rows});
-				//res.send(rows);
-			});	
+	// Query and sort by relevance
+	db.query("SELECT DISTINCT * FROM artist WHERE artistname LIKE ? ORDER BY CASE WHEN artistname LIKE ? THEN 0 WHEN artistname LIKE ? THEN 1 WHEN artistname LIKE ? THEN 2 ELSE 3 END", ["%"+search_val+"%", search_val, search_val+"%", "%"+search_val], function(err, rows, fields){
+		if(err) throw err;
+		// Reorder/select displayed rows
+		var fields = {}
+		var results = {}
+		res.render('results', { title: 'search by artist', category: 'Artists', query: search_val, results: rows});
+		//res.send(rows);
+	});	
 });
 
 router.get('/album-search', function(req, res, next) {
-	var search_val = req.query["album_name"] + '%';
+	var search_val = req.query["album_name"];
 	console.log(search_val);
-	db.query("SELECT DISTINCT * FROM album WHERE albumname LIKE ?",[search_val], function(err, rows, fields){
+	db.query("SELECT DISTINCT * FROM album WHERE albumname LIKE ? ORDER BY CASE WHEN albumname LIKE ? THEN 0 WHEN albumname LIKE ? THEN 1 WHEN albumname LIKE ? THEN 2 ELSE 3 END", ["%"+search_val+"%", search_val, search_val+"%", "%"+search_val], function(err, rows, fields){
 		if(err) throw err;
 		//console.log(req.body.artist_name);
-		res.render('results', { title: 'search by album', category: 'Album', album_results: rows});
+		res.render('results', { title: 'search by album', category: 'Album', query: search_val, results: rows});
 		// res.send(rows[0].artistname);
 	});	
 });
 
 router.get('/track-search', function(req, res, next) {
-	var search_val = req.query["track_name"] + "%";
-	console.log(search_val);
-	db.query("SELECT DISTINCT * FROM track WHERE title LIKE ?",[search_val], function(err, rows, fields){
+	var search_val = req.query["track_name"];
+	console.log(search_val);	
+	db.query("SELECT DISTINCT * FROM track WHERE trackname LIKE ? ORDER BY CASE WHEN trackname LIKE ? THEN 0 WHEN trackname LIKE ? THEN 1 WHEN trackname LIKE ? THEN 2 ELSE 3 END", ["%"+search_val+"%", search_val, search_val+"%", "%"+search_val], function(err, rows, fields){
 		if(err) throw err;
 		//console.log(req.body.artist_name);
-		res.render('results', { title: 'search by track', category: 'Track', track_results: rows});
+		res.render('results', { title: 'search by track', category: 'Track', query: search_val, results: rows});
 		// res.send(rows[0].artistname);
 	});	
 
@@ -45,10 +50,10 @@ router.get('/track-search', function(req, res, next) {
 router.get('/tag-search', function(req, res, next) {
 	var search_val = req.query["tag_name"];
 	console.log(search_val);
-	db.query("SELECT DISTINCT * FROM tags WHERE tag = ? LIMIT 10",[search_val], function(err, rows, fields){
+	db.query("SELECT DISTINCT * FROM tags WHERE tag = ? LIMIT 10", [search_val], function(err, rows, fields){
 		if(err) throw err;
 		//console.log(req.body.artist_name);
-		res.render('results', { title: 'search by tag', category: 'Tag', tag_results: rows});
+		res.render('results', { title: 'search by tag', category: 'Tag', query: search_val, results: rows});
 		// res.send(rows[0].artistname);
 	});	
 
