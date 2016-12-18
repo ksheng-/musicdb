@@ -14,7 +14,8 @@ $(document).ready(function(){
 	// Remove login prompt if signed in
 	if (Cookies.get('user')) {
 		console.log(Cookies.get('user') + " cookie found");
-		$("#current-user").text(Cookies.get('user'));
+		$(".current-user").text(Cookies.get('user'));
+		$('#alert').addClass('hidden');
 		$(".logout-text").removeClass("hidden");
 		$(".login-text").addClass("hidden");
 		$("#rate").removeClass("hidden");
@@ -22,6 +23,7 @@ $(document).ready(function(){
 	else {
 		console.log("No cookie found")
 		$("#rate").addClass("hidden");
+		$('#alert').removeClass('hidden');
 		$(".login-text").removeClass("hidden");
 		$(".logout-text").addClass("hidden");
 	}
@@ -30,6 +32,7 @@ $(document).ready(function(){
 	$("#logout").click(function(){
 		Cookies.remove('user');
 		Cookies.remove('uid');
+		$('#alert').removeClass('hidden');
 		$("#rate").addClass("hidden");
 		$(".logout-text").addClass("hidden");
 		$(".login-text").removeClass("hidden");
@@ -37,5 +40,10 @@ $(document).ready(function(){
 	});
 
 
+	// $('.track-click').click(function(){
+		// var track_name = $(this).text();
+		// $('#rate-title').text(track_name);
+		// Cookies.set('track',track_name);
+	// });
 });
 

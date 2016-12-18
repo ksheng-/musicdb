@@ -9,18 +9,31 @@ router.get('/', function(req,res,next){
 
 router.post('/get_rating', function(req, res, next) {
 	if(req.body.type == 'avg'){
-		var data={
-			'number_votes': 129,
-			'dec_avg': 2.7,
-			'whole_avg': 3
-		};
-		res.send(data);
+		var query_string = 'SELECT num_votes,trating FROM Tracks WHERE tname=?';
+		console.log(req.body.trackname);
+		db.query(query_string, [req.body.trackname], function(err,rows,fields){
+			if (err) throw err;
+			if(rows.length > 0){
+				//console.log(rows[0]);
+				res.status(200).send(rows[0]);
+			}
+		});
+
 	}
 	else{
-		var data={
-			'whole_avg':2
-		};
-		res.send(data);
+		var query_string = 'SELECT rates_track.rating, rates_track.comment FROM rates_track, Tracks WHERE (Tracks.tname=? AND rates_track.uid=?) AND Tracks.tid=rates_track.tid';
+console.log(req.body.trackname, req.body.uid);
+
+		db.query(query_string, [req.body.trackname, req.body.uid], function(err,rows,fields){
+			if (err) throw err;
+			if(rows.length > 0){
+				//console.log(rows[0]);
+				res.status(200).send(rows[0]);
+			}
+			else{
+				res.send({'rating': 0});
+			}
+		});
 	}
 });
 
@@ -28,11 +41,46 @@ router.post('/update_rating', function(req, res, next) {
 	var rating = req.body.rate;
 	var comment = req.body.review;
 	var uid = req.body.uid;
-	var trackid = req.body.trackid;
+	var trackname = req.body.trackname;
 
+	var query_string = 'SELECT * FROM rates_track, Tracks WHERE Tracks.tname=? AND rates_track.uid=?';
+	db.query(query_string, [trackname, uid], function(err,rows,fields){
+		if (err) throw err;
+
+		// rating already exists
+		if(rows.length > 0){
+			//console.log(rows[0]);
+			var query_string = 'UPDATE rates_track set rating=? ,comment=? WHERE tid=? AND uid=?';
+			db.query(query_string, [rating, comment, rows[0]['tid'], uid], function(err){
+				if (err) throw err;
+
+			});
+		}
+
+		// new rating record
+		else{
+
+			var query_string = 'SELECT tid FROM Tracks WHERE tname=?';
+			db.query(query_string, [trackname], function(err,rows,fields){
+				if (err) throw err;
+
+				var query_string = 'INSERT INTO rates_track(uid,tid,rating, comment) VALUES (?, ?, ?, ?)';
+				db.query(query_string, [uid,rows[0]['tid'],rating,comment], function(err){
+					if (err) throw err;
+					// update num_votes
+					else{
+						var query_string = 'UPDATE Tracks SET num_votes = num_votes + 1 WHERE tid=?';
+						db.query(query_string, [rows[0]['tid']], function(err){
+							if (err) throw err;
+						});
+					}
+				});
+
+			});
+		}
+	});
+	res.send('success');
 	// update database
-	
-	res.send('succefully commit comment');
 });
 
 

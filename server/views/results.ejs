@@ -14,41 +14,55 @@
 					<hr>
 				</div>
 			</div>
+			<% switch(category) {%>
+				<% case "Artists": %>
+					<% for (var result = 0; result < results.length; ++result) {%>
+						<div class="row">
+							<!-- <div class="col-md-8 col-md-offset-2"> -->
+
+							<!-- [> <table class="table table-hover"> <] -->
+							<!-- [> <tr> <] -->
+							<!-- [> <% for (var field in results[0]) {%> <] -->
+							<!-- [> <th><%= field %></th> <] -->
+							<!-- [> <% } %> <] -->
+							<!-- [> </tr> <] -->
+
+							<!-- [> [> [> search result <] <] <] -->
+							<!-- [> <% if( results.Track !== 'undefined'){ %> <] -->
+							<!-- [> <% for (var i = 0; i < results.length; ++i) {%> <] -->
+							<!-- [> <tr> <] -->
+							<!-- [> <% for (var field in results[0]) {%> <] -->
+							<!-- [> <% if( field == 'Track'){ %> <] -->
+							<!-- [> <td><a href="#" class='track-click' data-toggle="modal" data-target=".rating-modal"><%= results[i][field] %></a></td> <] -->
+							<!-- [> <% }else{ %> <] -->
+							<!-- [> <td><%= results[i][field] %></td> <] -->
+							<!-- [> <% } %> <] -->
+							<!-- [> <% } %> <] -->
+							<!-- [> </tr> <] -->
+							<!-- [> <% } %> <] -->
+							<!-- [> <% } %> <] -->
 
 
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<table class="table table-hover">
-						<tr>
-							<% for (var field in results[0]) {%>
-							<th><%= field %></th>
-							<% } %>
-						</tr>
-
-						<!-- search result -->
-						<% if( results.title !== 'undefined'){ %>
-						<% for (var i = 0; i < results.length; ++i) {%>
-						<tr>
-							<% for (var field in results[0]) {%>
-							<% if( field == 'title'){ %>
-							<td><a href="#" id='track-click' data-toggle="modal" data-target=".rating-modal"><%= results[i][field] %></a></td>
-							<% }else{ %>
-							<td><%= results[i][field] %></td>
-							<% } %>
-							<% } %>
-						</tr>
-						<% } %>
-						<% } %>
-
-					
-					</table>
-				</div>
-			</div>
+							<!-- [> </table> <] -->
+							<!-- </div> -->
+							<div class="col-md-3">
+								<% if (results[result].Image) {%>
+									<img src="/images/placeholder.png" class="img-rounded">
+								<% } >
+							</div>
+							<div class="col-md-9">
+								<h1>
+									<%= results[result].Artist %>
+								</h1>
+							</div>
+						</div>
+					<% } %>
+				<% break; %>
+			<% } %>
 		</div>
-		</body>
+	</body>
 
-		<!-- MODALS -->
-		<% include rating_modal.ejs %>
-		<% include scripts.ejs %>
+	<% include rating_modal.ejs %>
+	<% include scripts.ejs %>
 
-		</html>
+</html>

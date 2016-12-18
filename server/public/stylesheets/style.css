@@ -8,11 +8,17 @@ a {
 }
 
 .login-text {
-	margin-top: 20px;
+	margin-top: 24px;
 }
 
 .logout-text {
-	margin-top: 20px;
+	margin-top: 24px;
+}
+
+.login-text-nav {
+}
+
+.logout-text-nav {
 }
 
 .results-header {
@@ -28,6 +34,23 @@ a {
 	border-radius: 0;
 }
 
+.main-logo {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 48px;
+	font-weight: 700;
+	margin-top: 40%;
+	padding-bottom: 20px;
+}
+
+.navbar-brand{
+	color: #111111;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+}
+.navbar-brand span{
+	font-size: 16px;
+}
 
 .rate_widget{
 	border: 1px solid #CCC;

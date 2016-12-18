@@ -1,59 +1,76 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-<!--
-	<div class="col-md-3 col-md-offset-0">
-		<button type="button" id="back" class="glyphicon glyphicon-arrow-left"></button>
-	</div>
--->
-
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">musicdb</a>
+			<!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> -->
+				<!-- <span class="sr-only">Toggle navigation</span> -->
+				<!-- <span class="icon-bar"></span> -->
+				<!-- <span class="icon-bar"></span> -->
+				<!-- <span class="icon-bar"></span> -->
+			<!-- </button> -->
+			<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>  MUSICDB</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- <ul class="nav navbar-nav"> -->
-			<!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-			<!-- <li><a href="#">Link</a></li> -->
-			<!-- <li class="dropdown"> -->
-			<!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a> -->
-			<!-- <ul class="dropdown-menu"> -->
-			<!-- <li><a href="#">Action</a></li> -->
-			<!-- <li><a href="#">Another action</a></li> -->
-			<!-- <li><a href="#">Something else here</a></li> -->
-			<!-- <li role="separator" class="divider"></li> -->
-			<!-- <li><a href="#">Separated link</a></li> -->
-			<!-- <li role="separator" class="divider"></li> -->
-			<!-- <li><a href="#">One more separated link</a></li> -->
+				<!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+				<!-- <li><a href="#">Link</a></li> -->
+				<!-- <li class="dropdown"> -->
+				<!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a> -->
+				<!-- <ul class="dropdown-menu"> -->
+					<!-- <li><a href="#">Action</a></li> -->
+					<!-- <li><a href="#">Another action</a></li> -->
+					<!-- <li><a href="#">Something else here</a></li> -->
+					<!-- <li role="separator" class="divider"></li> -->
+					<!-- <li><a href="#">Separated link</a></li> -->
+					<!-- <li role="separator" class="divider"></li> -->
+					<!-- <li><a href="#">One more separated link</a></li> -->
+				<!-- </ul> -->
+				<!-- </li> -->
 			<!-- </ul> -->
-			<!-- </li> -->
-			<!-- </ul> -->
-			<!--
+
 			<form class="navbar-form navbar-left">
-				<div class="form-group">
-					<input type="text" id="search" class="form-control" placeholder="Search">
+				<div class="input-group">
+					<input type="text" class="form-control" id="search" placeholder="Search" aria-label="..." name="query">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default" id="btn-search"> 
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default dropdown-toggle" id="category-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value=1>
+							Artists
+							<!-- <span class="caret"></span> -->
+							<!-- <span class="sr-only">Toggle Dropdown</span> -->
+						</button>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">Category</li>
+							<li class="category" value="Artists"><a href="#">Artists</a></li>
+							<li class="category" value="Albums"><a href="#">Albums</a></li>
+							<li class="category" value="Tracks"><a href="#">Tracks</a></li>
+							<!-- <li role="separator" class="divider"></li> -->
+							<li	class="category" value="Tags"><a href="#"> Tags </a></li>
+						</ul>
+					</div>
 				</div>
-				<button type="button" id="btn-search" class="btn btn-default">Search</button>
-
 			</form>
-			-->
+			
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-				<a href="#" id="current-user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+				<div class="login-text-nav hidden">
+					<a href="#" data-toggle="modal" data-target=".login-modal">login</a> / 
+					<a href="#" data-toggle="modal" data-target=".signup-modal">signup</a>
+				</div>
 
-				<ul class="dropdown-menu">
-					<li><a href="#">Profile</a></li>
-					<li><a href="#" id="logout">log out</a></li>
-				</ul>
-				</li>
+				<a href="#" class="dropdown-toggle current-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+				<!--li class="dropdown"-->
+					<ul class="dropdown-menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#" id="logout">log out</a></li>
+					</ul>
+				<!--/li -->
 			</ul>
+			<!-- MODALS -->
+			<% include login_modal.ejs %>
+			<% include signup_modal.ejs %>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>

@@ -7,10 +7,28 @@ $(document).ready(function(){
 		var cpassword = $("#confirm-password").val();
 		var alnum = /^[A-Za-z0-9]+$/;
 
+		$("#form-username").removeClass("has-error");
+		$("#form-username").removeClass("has-success");
+		$("#form-username > .glyphicon-remove").addClass("hidden");
+		$("#form-username > .glyphicon-ok").addClass("hidden");
+		$("#form-password").removeClass("has-error");
+		$("#form-password").removeClass("has-success");
+		$("#form-password > .glyphicon-remove").addClass("hidden");
+		$("#form-password > .glyphicon-ok").addClass("hidden");
+		$("#form-cpassword").removeClass("has-error");
+		$("#form-cpassword").removeClass("has-success");
+		$("#form-cpassword > .glyphicon-remove").addClass("hidden");
+		$("#form-cpassword > .glyphicon-ok").addClass("hidden");
+		$("#err-length").addClass("hidden");
+		$("#err-match").addClass("hidden");
+		$("#err-alnum").addClass("hidden");
+		$("#err-taken").addClass("hidden");
+		
 		if (password.length <= 0 || password.length > 16){
 			$("#form-password").addClass("has-error");
 			$("#form-password > .glyphicon-remove").removeClass("hidden");
 			$("#err-length").removeClass("hidden");
+			return;
 		}
 		else{
 			$("#form-password").removeClass("has-error");
@@ -24,6 +42,7 @@ $(document).ready(function(){
 			$("#form-cpassword").addClass("has-error")
 			$("#form-cpassword > .glyphicon-remove").removeClass("hidden");
 			$("#err-match").removeClass("hidden");
+			return;
 		}
 		else{
 			$("#form-cpassword").removeClass("has-error");
@@ -37,7 +56,7 @@ $(document).ready(function(){
 			$("#form-username").addClass("has-error")
 			$("#form-username > .glyphicon-remove").removeClass("hidden");
 			$("#err-alnum").removeClass("hidden");
-	
+			return;
 		}
 		else{
 			$("#form-username").removeClass("has-error");
@@ -52,14 +71,24 @@ $(document).ready(function(){
 			type: "POST",
 			url: "/users/signup",
 			data: {username: username, password: password},
-			success: function(result){
-				if (result == 0){
-					$(".login").addClass("has-failure");
+			success: function(response){
+				location.reload();
+			},
+			error: function (xhr, ajaxOptions, thrownError){
+				switch (xhr.status) {
+					case 400:
+						console.log('Missing field');
+						break;
+					case 403:
+						$("#form-username").removeClass("has-success");
+						$("#form-username > .glyphicon-ok").addClass("hidden");
+						$("#form-username").addClass("has-error");
+						$("#form-username > .glyphicon-remove").removeClass("hidden");
+						$("#err-taken").removeClass("hidden");
+						console.log('Username exists');
+						break;
 				}
-				else{
-					location.reload();
-				}
-			}
+			} 
 		});
 	
 				
