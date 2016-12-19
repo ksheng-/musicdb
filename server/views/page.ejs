@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include head.ejs %> 
+	</head>
+	
+	<body>
+		<% include navbar.ejs %> 
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 page-header">
+					<h1><%= title %></h1>
+				</div>
+			</div>
+			<% if (category == "User") {%>
+				<% for (var result = 0; result < ratings.length; ++result) {%>
+					<div class="row">
+						<div class="col-md-10">
+							<div class="media result">
+								<div class="media-left result-img">
+									<% if (ratings[result].Image) {%>
+									<a href="<%= ratings[result].Image %>">
+										<img src="<%= ratings[result].Image %>" class="img-rounded media-object">
+									</a>
+									<% } else if (ratings[result].Type === "Group") {%>
+									<a href="#">
+										<img src="/images/users.png" class="img-rounded media-object img-search">
+									</a>
+									<% } else {%>
+									<a href="#">
+										<img src="/images/user.png" class="img-rounded media-object img-search">
+									</a>
+									<% } %>
+								</div>
+								<div class="media-body result-text">
+									<h2 class="media-heading"><%= ratings[result].Artist %></h2>
+									<%= ratings[result].Type %> <%= ratings[result].Locality %>
+									<br>
+									<% console.log(ratings[result].Tags) %>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 text-right">
+							Ratings
+						</div>
+					</div>
+				<% } %>
+
+			<% } else if (category == "Artist") {%>
+				<div class="row">
+					<div class="col-md-12">
+						<% if (artist[0].type != null) {%>
+							<button type="button" class="btn btn-success result-tag"><%= artist[0].type %></button>
+						<% } %>
+
+						<% if (artist[0].locality != null) {%>
+							<button type="button" class="btn btn-warning result-tag"><%= artist[0].locality %></button>
+						<% } %>
+
+						<% if (tags[0].tags != null) {%>
+							<% for(var j = 0; j < tags[0].tags.length; ++j) {%>
+								<button type="button" class="page-link btn btn-primary result-tag" data-page-name="<%= tags[0].tags[j] %>" data-page-type="Tag"><%= tags[0].tags[j]%></button>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+
+				<div class="row top-buffer">
+					<div class="col-md-4">
+						<table class="table table-hover">
+							<tr>
+								<th>Releases</th>
+							</tr>
+							<% for (var result = 0; result < releases.length; ++result) {%>
+							<tr>
+								<td>
+								<a href="#" class="page-link" data-page-name="<%= releases[result].rid %>" data-page-type="Release">
+										<%= releases[result].rname %>
+								</a>
+								</td>
+							</tr>
+							<% } %>
+						</table>
+					</div>
+					<div class="col-md-4">
+						<table class="table table-hover">
+							<tr>
+								<th>Track</th><th>Release</th><th>Duration</th>
+							</tr>
+							<% for (var result = 0; result < tracks.length; ++result) {%>
+							<tr>
+								<td>
+									<a href="#" class="page-link" data-page-name="<%= tracks[result].tid %>" data-page-type="Track">
+										<%= tracks[result].tname %>
+									</a>
+								</td>
+								<td>
+									<a href="#" class="page-link" data-page-name="<%= tracks[result].rid %>" data-page-type="Release">
+										<%= tracks[result].rname %>
+									</a>
+								</td>
+								<td><%= tracks[result].duration %></td>
+							</tr>
+							<% } %>
+						</table>
+					</div>
+					<div class="col-md-4">
+						<table class="table table-hover">
+							<tr>
+								<th>User</th><th>Rating</th>
+							</tr>
+							<% for (var result = 0; result < ratings.length; ++result) {%>
+							<tr>
+								<td><%= ratings[result].username %></td>
+								<td><%= ratings[result].rating %></td>
+							</tr>
+							<% } %>
+						</table>
+					</div>
+				</div>
+			<% } else if (category == "Release"){ %>
+				<div class="row">
+					<div class="col-md-6">
+						<h2>
+							Artist:
+							<a href="#" class="page-link" data-page-name="<%= artist[0].aid %>" data-page-type="Artist">
+								<%= artist[0].name %>
+							</a>
+						</h2>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-6">
+						<table class="table table-hover">
+							<tr>
+								<th>Track</th><th>Duration</th>
+							</tr>
+							<% for (var result = 0; result < tracks.length; ++result) {%>
+							<tr>
+								<td>
+									<a href="#" class="page-link" data-page-name="<%= tracks[result].tid %>" data-page-type="Track">
+										<%= tracks[result].tname %>
+									</a>
+								</td>
+								<td><%= tracks[result].duration %></td>
+							</tr>
+							<% } %>
+						</table>
+					</div>
+					<div class="col-md-6">
+						<table class="table table-hover">
+							<tr>
+								<th>User</th><th>Rating</th>
+							</tr>
+							<% for (var result = 0; result < ratings.length; ++result) {%>
+							<tr>
+								<td><%= ratings[result].username %></td>
+								<td><%= ratings[result].rating %></td>
+							</tr>
+							<% } %>
+						</table>
+					</div>
+				</div>			
+			<% } else if (category == "Track") { %>
+				<div class="row">
+					<div class="col-md-6">
+						<h2>
+							Artist:
+							<a href="#" class="page-link" data-page-name="<%= artist_release[0].aid %>" data-page-type="Artist">
+								<%= artist_release[0].name %>
+							</a>
+						</h2>
+						<h4>
+							Release:
+							<a href="#" class="page-link" data-page-name="<%= artist_release[0].rid %>" data-page-type="Release">
+								<%= artist_release[0].rname %>
+							</a>
+						</h4>
+						<br>
+						<h4>
+							<span class="glyphicon glyphicon-time" aria-hidden="true"> </span> <%= artist_release[0].duration %> s	
+						</h4>
+					</div>
+					<div class="col-md-6">
+						<table class="table table-hover">
+							<tr>
+								<th>User</th><th>Rating</th>
+							</tr>
+							<% for (var result = 0; result < ratings.length; ++result) {%>
+							<tr>
+								<td><%= ratings[result].username %></td>
+								<td><%= ratings[result].rating %></td>
+							</tr>
+							<% } %>
+						</table>
+					</div>
+				</div>
+			<% } %>
+
+
+		</div>
+	</body>
+	<% include login_modal.ejs %>
+	<% include signup_modal.ejs %>
+	<% include rating_modal.ejs %>
+	<% include scripts.ejs %>
+
+</html>

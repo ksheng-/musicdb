@@ -1,19 +1,15 @@
 $(document).ready(function() {
 
-	$("#category-button").val("Artists");
+	$(".category-button").val("Artists");
 	$("#search").val("");
 
 	$(".category").click(function(){
 		console.log("category selected");
-		$("#category-button").val($(this).text());
-		$("#category-button").text($(this).text());
+		$(".category-button").val($(this).text());
+		$(".category-button").text($(this).text());
 	});
 
-	// Enter key searching
-	$('#search').keyup(function(e){
-		if(e.keyCode == 13)
-		$("#btn-search").click();
-	});
+
 
 	// $("#back").click(function(){
 		// console.log('back');
@@ -22,7 +18,7 @@ $(document).ready(function() {
 
 	$("#btn-search").click(function(){
 		var search_val = $("#search").val();
-		var category = $("#category-button").val();
+		var category = $(".category-button").val();
 		console.log("Searched " + category + " for " + search_val);
 
 		// if(search_val == "")
@@ -84,26 +80,14 @@ $(document).ready(function() {
 	});
 
 
-
-	$('.artist-click').click(function(){
-		console.log($(this).text());
-		var payload = {
-			artist_name: $(this).text() 
-		};
-
-		var query = $.param(payload);
-		location.href = "/artist-search?" + query;
+	//Enter key searching
+	$('#search').keyup(function(e){
+		if(e.keyCode == 13){
+			$("#btn-search").click();
+		}
 	});
 
-	$('.album-click').click(function(){
-		console.log($(this).text());
-		var payload = {
-			album_name: $(this).text() 
-		};
 
-		var query = $.param(payload);
-		location.href = "/album-search?" + query;
-	});
 
 });
 

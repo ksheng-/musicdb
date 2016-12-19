@@ -6,62 +6,159 @@
 	
 	<body>
 		<% include navbar.ejs %> 
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 results-header">
+				<div class="col-md-8 results-header">
 					<h1><strong>Search Results</strong></h1>
 					<h3><em><strong><%= results.length %></strong> entries containing <strong>"<%= query %>"</strong> in <span class="lowercase"><%= category %></span>.</em></h3>
 					<hr>
 				</div>
 			</div>
-			<% switch(category) {%>
-				<% case "Artists": %>
-					<% for (var result = 0; result < results.length; ++result) {%>
-						<div class="row">
-							<!-- <div class="col-md-8 col-md-offset-2"> -->
+			<% if (category == "Artists") {%>
+				<% for (var result = 0; result < results.length; ++result) {%>
+					<div class="row">
+						<div class="col-md-10">
+							<div class="media result">
+								<div class="media-left result-img">
+									<% if (results[result].Image) {%>
+										<a href="<%= results[result].Image %>">
+											<img src="/images/users.png" class="img-rounded media-object">
+										</a>
+									<% } else if (results[result].Type === "Group") {%>
+										<!-- <a href="#"> -->
+											<img src="/images/users.png" class="img-rounded media-object img-search">
+										<!-- </a> -->
+									<% } else {%>
+										<!-- <a href="#"> -->
+											<img src="/images/user.png" class="img-rounded media-object img-search">
+										<!-- </a> -->
+									<% } %>
+								</div>
+								<div class="media-body result-text">
+									<h2 class="media-heading result-header"><a href="#" class="page-link" data-page-name="<%= results[result].ArtistID %>" data-page-type="Artist"><%= results[result].Artist %></a></h2>
+									<% if (results[result].Type != null) {%>
+										<div class="result-sub"><%= results[result].Type %></div>
+									<% } %>
+								
+									<% if (results[result].Locality != null) {%>
+										<div class="result-sub"><%= results[result].Locality %></div>
+									<% } %>
 
-							<!-- [> <table class="table table-hover"> <] -->
-							<!-- [> <tr> <] -->
-							<!-- [> <% for (var field in results[0]) {%> <] -->
-							<!-- [> <th><%= field %></th> <] -->
-							<!-- [> <% } %> <] -->
-							<!-- [> </tr> <] -->
-
-							<!-- [> [> [> search result <] <] <] -->
-							<!-- [> <% if( results.Track !== 'undefined'){ %> <] -->
-							<!-- [> <% for (var i = 0; i < results.length; ++i) {%> <] -->
-							<!-- [> <tr> <] -->
-							<!-- [> <% for (var field in results[0]) {%> <] -->
-							<!-- [> <% if( field == 'Track'){ %> <] -->
-							<!-- [> <td><a href="#" class='track-click' data-toggle="modal" data-target=".rating-modal"><%= results[i][field] %></a></td> <] -->
-							<!-- [> <% }else{ %> <] -->
-							<!-- [> <td><%= results[i][field] %></td> <] -->
-							<!-- [> <% } %> <] -->
-							<!-- [> <% } %> <] -->
-							<!-- [> </tr> <] -->
-							<!-- [> <% } %> <] -->
-							<!-- [> <% } %> <] -->
-
-
-							<!-- [> </table> <] -->
-							<!-- </div> -->
-							<div class="col-md-3">
-								<% if (results[result].Image) {%>
-									<img src="/images/placeholder.png" class="img-rounded">
-								<% } >
-							</div>
-							<div class="col-md-9">
-								<h1>
-									<%= results[result].Artist %>
-								</h1>
+									<% if (results[result].Tags != null) {%>
+										<% for(var j = 0; j < results[result].Tags.length; ++j) {%>
+										<button type="button" class="page-link btn btn-primary result-tag" data-page-name="<%= results[result].Tags[j] %>" data-page-type="Tag"><%= results[result].Tags[j] %></button>
+										<% } %>
+									<% } %>
+								</div>
 							</div>
 						</div>
-					<% } %>
-				<% break; %>
+						<div class="col-md-2 text-right">
+							<div class="result-rating"><%= Math.round(results[result].Rating * 10)/10 %></div>	
+						</div>
+					</div>
+				<% } %>
+			<% } else if (category == "Releases"){ %>
+				<% for (var result = 0; result < results.length; ++result) {%>
+					<div class="row">
+						<div class="col-md-10">
+							<div class="media result">
+								<div class="media-left result-img">
+									<img src="/images/disc.png" class="img-rounded media-object img-search">	
+								</div>
+								<div class="media-body result-text">
+									<h1 class="media-heading result-header result-header-release"><a href="#" class="page-link" data-page-name="<%= results[result].AlbumID %>" data-page-type="Release"><%= results[result].Release %></a></h1>
+
+									<div class="result-sub result-sub-release">
+										<a href="#" class="page-link" data-page-name="<%= results[result].ArtistID %>" data-page-type="Artist"><%= results[result].Artist %></a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 text-right">
+							<div class="result-rating"><%= Math.round(results[result].Rating * 10)/10 %></div>	
+						</div>
+					</div>
+				<% } %>
+			<% } else if (category === "Tracks") { %>
+				<% for (var result = 0; result < results.length; ++result) {%>
+					<div class="row">
+						<div class="col-md-10">
+							<div class="media result">
+								<div class="media-left result-img">
+									<img src="/images/music.png" class="img-rounded media-object img-search">
+								</div>
+								<div class="media-body result-text">
+									<h2 class="media-heading result-header"><a href="#" class="page-link" data-page-name="<%= results[result].TrackID %>" data-page-type="Track"><%= results[result].Track %></a></h2>
+									<div class="result-sub result-sub-track">
+										<a href="#" class="page-link" data-page-name="<%= results[result].AlbumID %>" data-page-type="Release"><%= results[result].Release %></a>
+									</div>
+									<div class="result-sub result-sub-track">
+										<a href="#" class="page-link" data-page-name="<%= results[result].ArtistID %>" data-page-type="Artist"><%= results[result].Artist %></a>
+									</div>
+									<% if (results[result].Duration != null) {%>
+									<div class="result-sub"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <%= Math.round(results[result].Duration * 100)/100 %>s</div>
+									<% } %>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 text-right">
+							<div class="result-rating"><%= Math.round(results[result].Rating * 10)/10 %></div>	
+						</div>
+					</div>
+				<% } %>
+			<% } else { %>
+				<% for (var result = 0; result < results.length; ++result) {%>
+					<div class="row">
+						<div class="col-md-10">
+							<div class="media result">
+								<div class="media-left result-img">
+									<% if (results[result].Image) {%>
+										<a href="<%= results[result].Image %>">
+											<img src="/images/users.png" class="img-rounded media-object">
+										</a>
+									<% } else if (results[result].Type === "Group") {%>
+										<a href="#">
+											<img src="/images/users.png" class="img-rounded media-object img-search">
+										</a>
+									<% } else {%>
+										<a href="#">
+											<img src="/images/user.png" class="img-rounded media-object img-search">
+										</a>
+									<% } %>
+								</div>
+								<div class="media-body result-text">
+									<h2 class="media-heading result-header"><a href="#" class="page-link" data-page-name="<%= results[result].ArtistID %>" data-page-type="Artist"><%= results[result].Artist %></a></h2>
+									<% if (results[result].Type != null) {%>
+										<div class="result-sub"><%= results[result].Type %></div>
+									<% } %>
+								
+									<% if (results[result].Locality != null) {%>
+										<div class="result-sub"><%= results[result].Locality %></div>
+									<% } %>
+
+									<% if (results[result].Tags != null) {%>
+										<% for(var j = 0; j < results[result].Tags.length; ++j) {%>
+										<button type="button" class="page-link btn btn-primary result-tag" data-page-name="<%= results[result].Tags[j] %>" data-page-type="Tag"><%= results[result].Tags[j] %></button>
+										<% } %>
+									<% } %>
+								</div>
+								<hr>
+							</div>
+						</div>
+						<div class="col-md-2 text-right">
+							<div class="result-rating"><%= results[result].Rating %></div>	
+						</div>
+					</div>
+				<% } %>
 			<% } %>
+
+
 		</div>
 	</body>
-
+	<% include login_modal.ejs %>
+	<% include signup_modal.ejs %>
 	<% include rating_modal.ejs %>
 	<% include scripts.ejs %>
 

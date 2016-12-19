@@ -7,32 +7,27 @@ a {
   color: #00B7FF;
 }
 
-.login-text {
-	margin-top: 24px;
-}
-
-.logout-text {
-	margin-top: 24px;
-}
-
-.login-text-nav {
-}
-
-.logout-text-nav {
-}
-
-.results-header {
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
 .lowercase {
 	text-transform: lowercase;
 }
 
-.dropdown-toggle {
-	border-radius: 0;
-}
+
+.top-buffer { margin-top:20px; }
+
+
+/* Login text */
+
+
+
+/* .login-text-nav { */
+	/* margin: 0; */
+/* } */
+
+/* .logout-text-nav { */
+	/* margin: 0; */
+/* } */
+
+/* Homepage */
 
 .main-logo {
 	font-family: 'Montserrat', sans-serif;
@@ -42,14 +37,114 @@ a {
 	padding-bottom: 20px;
 }
 
-.navbar-brand{
-	color: #111111;
+.login-text-home {
+	margin-top: 32px;
+}
+
+/* Nav */
+.navbar-header a {
+	color: #000;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 700;
 }
-.navbar-brand span{
+.navbar-header a span{
+	color: #00bcd4;
+	font-size: 18px;
+}
+
+.user-nav {
+}
+
+/* Search results */
+.results-header {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.result {
+	padding-bottom: 64px;
+}
+
+.result-img img {
+	width: 130px;
+	height: 130px;
+	margin-right: 24px;
+}
+
+.result-sub {
 	font-size: 16px;
+	font-style: italic;
+	margin-bottom: 8px;
+}
+.result-header-release{
+	margin-top: 20px;
+}
+.result-sub-release {
+	font-size: 32px;
+	font-weight: 300;
+}
+
+.result-sub-release a{
+	color: #666; 
+	-o-transition:.1s;
+	-ms-transition:.1s;
+	-moz-transition:.1s;
+	-webkit-transition:.1s;
+	/* ...and now for the proper property */
+	transition:.1s;
+}
+
+.result-sub-release a:hover{
+	text-decoration: none;
+	color: #00bcd4;
+}
+
+.result-sub-track {
+	font-size: 24px;
+	font-weight: 300;	
+}
+
+.result-sub-track a{
+	color: #666; 
+	-o-transition:.1s;
+	-ms-transition:.1s;
+	-moz-transition:.1s;
+	-webkit-transition:.1s;
+	/* ...and now for the proper property */
+	transition:.1s;
+}
+
+.result-sub-track a:hover{
+	text-decoration: none;
+	color: #00bcd4;
+}
+
+.result-tag {
+	font-size: 14px;
+	margin-bottom: 4px;
+}
+
+.result-rating {
+	color:  #607d8b;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 48px;
+	font-weight: 700;
+}
+
+.result-header a{
+	color: #222;
+	-o-transition:.1s;
+	-ms-transition:.1s;
+	-moz-transition:.1s;
+	-webkit-transition:.1s;
+	/* ...and now for the proper property */
+	transition:.1s;
+}
+
+.result-header a:hover{
+	text-decoration: none;
+	color: #607d8b;
 }
 
 .rate_widget{

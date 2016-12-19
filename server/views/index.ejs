@@ -5,11 +5,11 @@
 	</head>
 
 	<body>
-		<div class="container-fluid">
+		<div class="container">
 			<!-- LOGO -->
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-					<div class="text-center main-logo"><%= title %></h1>
+					<div class="text-center main-logo">MUSICDB</h1>
 				</div>
 			</div>
 			<!-- SEARCHBAR -->
@@ -21,7 +21,7 @@
 							<button type="button" class="btn btn-default" id="btn-search"> 
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default dropdown-toggle" id="category-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value=1>
+							<button type="button" class="btn btn-default dropdown-toggle category-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value=1>
 								Artists
 								<!-- <span class="caret"></span> -->
 								<!-- <span class="sr-only">Toggle Dropdown</span> -->
@@ -32,7 +32,7 @@
 								<li class="category" value="Albums"><a href="#">Albums</a></li>
 								<li class="category" value="Tracks"><a href="#">Tracks</a></li>
 								<!-- <li role="separator" class="divider"></li> -->
-								<li	class="category" value="Tags"><a href="#"> Tags </a></li>
+								<li	class="category" value="Tags"><a href="#">Tags</a></li>
 							</ul>
 						</div>
 					</div>
@@ -41,14 +41,16 @@
 			<!-- LOGIN OR REGISTER-->
 			<div class="row">
 				<!-- BUTTONS -->
-				<div class="col-md-2 col-md-offset-5">
-					<div class="text-center login-text hidden">
-						<a href="#" data-toggle="modal" data-target=".login-modal">login</a> / 
-						<a href="#" data-toggle="modal" data-target=".signup-modal">signup</a>
-					</div>
-					<div class="text-center logout-text hidden">
-						currently signed in as <a href="#" class="current-user"></a> /  
-						<a href="#" id="logout">logout</a>
+				<div class="col-md-4 col-md-offset-4">
+					<div class="login-text-home">
+						<div class="text-center login-text hidden">
+							<a href="#" data-toggle="modal" data-target=".login-modal">login</a> / 
+							<a href="#" data-toggle="modal" data-target=".signup-modal">signup</a>
+						</div>
+						<div class="text-center logout-text hidden">
+							currently signed in as <a href="#" class="current-user"></a> /  
+							<a href="#" id="logout">logout</a>
+						</div>
 					</div>
 				</div>
 
@@ -59,24 +61,33 @@
 		</div>
 
 		<!-- RECOMMENDATION -->
-		<!-- <div class="container-fluid"> -->
-			<!-- <div class="row"> -->
-				<!-- <div class="col-md-8 col-md-offset-2 results-header"> -->
-					<!-- <h1><strong>Recommendation</strong></h1> -->
-				<!-- </div> -->
-			<!-- </div> -->
-			<!-- <div class="row"> -->
-				<!-- <div class="col-md-8 col-md-offset-2"> -->
-					<!-- <table class="table table-hover"> -->
-						<!-- <tr> -->
-						<!-- </tr> -->
-						<!-- <tr> -->
-						<!-- </tr> -->
-					<!-- </table> -->
-				<!-- </div> -->
-			<!-- </div> -->
-		<!-- </div> -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<table class="table table-hover">
+						<h2 class='text-center'>Recommendation</h2>
+						<tr>
+							<th><strong>Track</strong></th>
+							<th><strong>Rating</strong></th>
 
-	</body>
-	<% include scripts.ejs %>
-</html>
+						</tr>
+						<tr>
+							<th><span id='track1'>track1</span></th>
+							<th><span id='rate1'>rate1</span></th>
+						</tr>
+						<tr>
+							<th><span id='track2'>track2</span></th>
+							<th><span id='rate2'>rate2</span></th>
+						</tr>
+						<tr>
+							<th><span id='track3'>track3</span></th>
+							<th><span id='rate3'>rate3</span></th>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		</body>
+		<% include scripts.ejs %>
+		</html>

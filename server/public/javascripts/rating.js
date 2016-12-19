@@ -69,15 +69,15 @@ $(document).ready(function(){
 		var INFO = $(this).parent().data('fsr');
 
 		if(widget.attr('id') == 'user_rating'){
-			INFO['trating'] = rating;
-			$(widget).data('fsr',INFO);
+			// INFO['trating'] = rating;
+			$(widget).data('fsr').rating = rating;
 			set_votes(widget);
 		}
 
 	});
 
 	$('#btn-comment').click(function(){
-		var rating = $('#user_rating').data('fsr').trating;
+		var rating = $('#user_rating').data('fsr').rating;
 		var comment = $('#comment').val();
 		var uid = Cookies.get('uid');
 		var tname = $('#rate-title').text();

@@ -44,7 +44,7 @@ router.post('/signup', function(req,res,next){
 
 	var query_string = "SELECT * FROM Users WHERE username = ?";
 
-	console.log("sending query");
+	console.log(req.body.username);
 	db.query(query_string, [req.body.username], function(err,rows,fields){
 		if (err) throw err;
 		if (rows.length > 0){

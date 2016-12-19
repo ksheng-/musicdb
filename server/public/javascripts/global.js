@@ -15,6 +15,7 @@ $(document).ready(function(){
 	if (Cookies.get('user')) {
 		console.log(Cookies.get('user') + " cookie found");
 		$(".current-user").text(Cookies.get('user'));
+		$(".current-user").removeClass("hidden");
 		$('#alert').addClass('hidden');
 		$(".logout-text").removeClass("hidden");
 		$(".login-text").addClass("hidden");
@@ -36,7 +37,7 @@ $(document).ready(function(){
 		$("#rate").addClass("hidden");
 		$(".logout-text").addClass("hidden");
 		$(".login-text").removeClass("hidden");
-		location.href = "/";
+		location.reload();
 	});
 
 

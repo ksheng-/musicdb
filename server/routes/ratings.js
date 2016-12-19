@@ -43,13 +43,13 @@ router.post('/update_rating', function(req, res, next) {
 	var uid = req.body.uid;
 	var trackname = req.body.trackname;
 
-	var query_string = 'SELECT * FROM rates_track, Tracks WHERE Tracks.tname=? AND rates_track.uid=?';
+	var query_string = 'SELECT * FROM rates_track, Tracks WHERE (Tracks.tname=? AND rates_track.uid=?) AND Tracks.tid=rates_track.tid';
 	db.query(query_string, [trackname, uid], function(err,rows,fields){
 		if (err) throw err;
 
 		// rating already exists
 		if(rows.length > 0){
-			//console.log(rows[0]);
+			console.log('change rating');
 			var query_string = 'UPDATE rates_track set rating=? ,comment=? WHERE tid=? AND uid=?';
 			db.query(query_string, [rating, comment, rows[0]['tid'], uid], function(err){
 				if (err) throw err;
@@ -60,11 +60,12 @@ router.post('/update_rating', function(req, res, next) {
 		// new rating record
 		else{
 
+			console.log('new record');
 			var query_string = 'SELECT tid FROM Tracks WHERE tname=?';
 			db.query(query_string, [trackname], function(err,rows,fields){
 				if (err) throw err;
 
-				var query_string = 'INSERT INTO rates_track(uid,tid,rating, comment) VALUES (?, ?, ?, ?)';
+				var query_string = "INSERT INTO rates_track(uid,tid,rating, comment) VALUES (?, ?, ?, ?)";
 				db.query(query_string, [uid,rows[0]['tid'],rating,comment], function(err){
 					if (err) throw err;
 					// update num_votes
@@ -79,8 +80,16 @@ router.post('/update_rating', function(req, res, next) {
 			});
 		}
 	});
-	res.send('success');
+
 	// update database
+	var query_string = 'UPDATE Tracks A INNER JOIN (SELECT AVG(rates_track.rating) r, rates_track.tid t  FROM rates_track, Tracks WHERE Tracks.tname=? AND Tracks.tid=rates_track.tid) B ON A.tid= B.t SET A.trating=B.r';
+	db.query(query_string, [trackname], function(err,rows,fields){
+		if (err) throw err;
+
+	});
+
+	res.send('success');
+
 });
 
 
